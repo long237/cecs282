@@ -43,7 +43,8 @@ int main(int argc, char* argv[]) {
 	else {
 		int prize = range2(engine);
 		if (prize == 1) {
-			cout << "put a 1st prize here" << endl;
+			cout << "Titan graphic card!!!" << 
+				"A powerful and expensive graphic card" <<endl;
 		}
 		else if (prize == 2) {
 			cout << "put a 2nd prize here" << endl;
