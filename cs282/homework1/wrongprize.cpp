@@ -32,27 +32,29 @@ int main(int argc, char* argv[]) {
 	cout << "Would you want to switch door ? [ (y)es or (n)o ]" << endl;
 	char user_bool;
 	cin >> user_bool;
-	if (user_bool == "y") {
+	if (user_bool == 'y') {
 		cin >> user_choice;
 	}
 
 	// Revealing the result of the deal.
-	if (user_choice != winning_choice) {
+	if (user_choice != winning_door) {
 		cout << "Omae Wa Mou Shindeiru" << endl;
+	}
 	else {
 		int prize = range2(engine);
 		if (prize == 1) {
 			cout << "put a 1st prize here" << endl;
-		
+		}
 		else if (prize == 2) {
 			cout << "put a 2nd prize here" << endl;
-
+		}
 		else if (prize == 3) {
 			cout << "put a 3rd prize here" << endl;
-
-		else if (prize == 4)
+		}
+		else if (prize == 4) {
 			cout << "put a 4th prize here" << endl;
-		
+		}
 		else (prize == 5) {
 			cout << "put a 5th prize here" << endl;
+		}
 }
