@@ -26,19 +26,20 @@ int main(int argc, char* argv[]) {
 	}		
 	
 	//revealing the door
-	cout << "Behind door number" << reveal_door << "is a goat" << endl;
+	cout << "Behind door number " << reveal_door << " is a goat" << endl;
 	
 	//switching doors?
 	cout << "Would you want to switch door ? [ (y)es or (n)o ]" << endl;
 	char user_bool;
 	cin >> user_bool;
 	if (user_bool == 'y') {
+		cout << "Choose between the 2 remaining door" << endl;
 		cin >> user_choice;
 	}
 
 	// Revealing the result of the deal.
 	if (user_choice != winning_door) {
-		cout << "Omae Wa Mou Shindeiru" << endl;
+		cout << "Omae Wa Mou Shindeiru !!!" << endl;
 	}
 	else {
 		int prize = range2(engine);
@@ -54,7 +55,8 @@ int main(int argc, char* argv[]) {
 		else if (prize == 4) {
 			cout << "put a 4th prize here" << endl;
 		}
-		else (prize == 5) {
+		else {
 			cout << "put a 5th prize here" << endl;
 		}
+	}
 }
