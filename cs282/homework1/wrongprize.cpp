@@ -43,19 +43,30 @@ int main(int argc, char* argv[]) {
 	else {
 		int prize = range2(engine);
 		if (prize == 1) {
-			cout << "Titan graphic card!!!" << 
-				"A powerful and expensive graphic card" <<endl;
+			cout << "Titan RTX graphic card!!!" << 
+				"A powerful and expensive graphic card with 24Gb of video memory DDR6 and boost clock of 24Mhz" << endl;
 		}
 		else if (prize == 2) {
-			cout << "put a 2nd prize here" << endl;
+			cout << "Ryzen 7 3700x "<< 
+				"Multicore processor with 8 cores and 16 threads with base clock speed at 3.6GHz"<< 
+				"and boost clock at 4.4GHz more than enough power" << 
+				"to render any video and way over kill for any games that you might play."<< endl;
 		}
 		else if (prize == 3) {
-			cout << "put a 3rd prize here" << endl;
+			cout << "Ticket to Comic Con 2020: San Diego" << 
+				"A wonderful convention if you are a fan of comics. Meet other people with the same interest as well as their special guests"
+				<<"partake in amazing activities" << endl;
 		}
 		else if (prize == 4) {
-			cout << "put a 4th prize here" << endl;
+			cout << "Monster Hunter World and Iceborn DLC"<< 
+				"A great MMORPG	game where you can hunt monster and carve them for parts and make weapons."<< 
+				"The DLC contain exclusive monsters as well as weapons and armor."
+				"Once you have some interest in the game, you will be hooked into the never ending grind and have no life." 
+				"So say goodbye to your social life and enjoy the content"<< endl;
 		}
 		else (prize == 5) {
-			cout << "put a 5th prize here" << endl;
+			cout << "RX 5600xt GPU" <<
+				"A beefy graphic card that with 6GB of video memory DDR6 and a base clock of 1413MHz."<< 
+			 	"A budget friendly and amazing perfomance compare to their counter parts NVidia overprice products." << endl;
 		}
 }
