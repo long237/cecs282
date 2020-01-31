@@ -20,8 +20,9 @@ int main(int argc, char* argv[]) {
 	int user_choice;
 	cin >> user_choice;
 
+	//pick a door to reveal to the user
 	int reveal_door = user_choice;
-	while (reveal_door == user_choice && reveal_door == winning_door){ 
+	while (reveal_door == user_choice || reveal_door == winning_door){ 
 		reveal_door = range(engine);
 	}		
 	
@@ -61,8 +62,8 @@ int main(int argc, char* argv[]) {
 		else if (prize == 4) {
 			cout << "Enjoy Monster Hunter World and Iceborn DLC"<< 
 				"A great MMORPG	game where you can hunt monster and carve them for parts and make weapons."<< 
-				"The DLC contain exclusive monsters as well as weapons and armor."
-				"Once you have some interest in the game, you will be hooked into the never ending grind and have no life." 
+				"The DLC contain exclusive monsters as well as weapons and armor."<<
+				"Once you have some interest in the game, you will be hooked into the never ending grind and have no life." <<
 				"So say goodbye to your social life and enjoy the content"<< endl;
 		}
 		else {
