@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
     game_board[2][1] = 0;
     game_board[2][2] = 0;
 
-    char test1 = '-1';
-    char test2 = '1';
+    char test1 = -1;
+    char test2 = 1;
     if (test1 == test2) {
         cout << "they are equal" << endl;
     }
@@ -39,18 +39,15 @@ int main(int argc, char* argv[]) {
             validity = MoveIsValid(game_board, row, col);
         }
         if (turn == 1) {
-            game_board[row][col] = '1';
+            game_board[row][col] = 1;
             cout << "player" << turn << "move" << endl;
             turn++;
         }
         else {
-            game_board[row][col] = '-1';
+            game_board[row][col] = -1;
             cout << "player" << turn << "move" << endl;
-            turn = -1;
+            turn = turn - 1;
         }
     }
-
-    char test3 = '-5';
-    cout << "this is the char " << test3 << endl;
 
 }

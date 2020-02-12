@@ -8,10 +8,10 @@ void PrintBoard(const std::array<std::array<char, 3>, 3> &board){
 	for (int i = 0; i < 3; i++) {
 		cout<< i << " ";
 		for (int j = 0; j < 3; j++) {
-			if (board[i][j] == '1') {
+			if (board[i][j] == 1) {
 				cout<< "X ";
 			}
-			else if (board[i][j] == '-1'){
+			else if (board[i][j] == -1){
 				cout<< "O ";
 			} 
 			else {
@@ -33,14 +33,11 @@ void GetMove(int &row, int &col){
 
 bool  MoveIsValid(const std::array<std::array<char, 3>, 3> &board,
 		int row, int col) {
-	if ((row >= 0 && row < 3) && (col >= 0 && col < 3)) {
-		if ( board[row][col] == 0) {
-			cout<< "def true"<< endl;
+	if ((row >= 0 && row < 3) && (col >= 0 && col < 3) && (board[row][col] == 0)) {
 			return true;
-		}
 	}
 	else {
-		cout<< "def false" << endl;
+		//cout<< "def false" << endl;
 		return false;
 	}
 }
