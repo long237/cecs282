@@ -4,38 +4,53 @@
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	int usr_row = 0;
-	int usr_col = 0;
-	
-	GetMove(usr_row, usr_col);
-	cout<< "this is row: " << usr_row <<endl;
-	cout << "this is col: " << usr_col <<endl;
-	
-	char test = 5;
-	cout<< "char value " << test << endl;
-	cout<<"test array" <<endl;	
-	std::array<char,3> testcase = {0,0,0};
-	for(int i = 0; i < 3; i++) {
-		cout<< testcase[i] <<endl;
-	}
-	char test_var = '-1';
-	cout << "this is test variable: " << (int) test_var << endl;
-	std::array<std::array<char, 3>, 3> board = {0};
-	//cout << "this is the array: " << board << endl;	
-	PrintBoard(board);	
+    std::array<std::array<char, 3>, 3> game_board = {0};
+    game_board[0][0] = 0;
+    game_board[0][1] = 0;
+    game_board[0][2] = 0;
+    game_board[1][0] = 0;
+    game_board[1][1] = 0;
+    game_board[1][2] = 0;
+    game_board[2][0] = 0;
+    game_board[2][1] = 0;
+    game_board[2][2] = 0;
 
-	board[0][0] = 0;
-	board[0][1] = 0;
-	board[0][2] = '1';
-	board[1][0] = 0;
-	board[1][1] = '1';
-	board[1][2] = 0;
-	board[2][0] = '1';
-	board[2][1] = 0;
-	board[2][2] = '1';
-	cout<<"this is the board: "<< endl;
-	PrintBoard(board);
+    char test1 = '-1';
+    char test2 = '1';
+    if (test1 == test2) {
+        cout << "they are equal" << endl;
+    }
 
-	cout<< "test check move " << MoveIsValid(board, usr_row, usr_col)<< endl;
- 
+    if (test2 == 1) {
+        cout << "1 char is equal to 1 char" << endl;
+    }
+
+    int turn = 1;
+    int row;
+    int col;
+    bool validity = false;
+    //keep asking for input if moveisvalid return false
+    for (int i = 0; i < 9; i++) {
+        PrintBoard(game_board);
+        bool validity = false;
+        while (!validity) {
+            cout << "Player" << turn << endl;
+            GetMove(row, col);
+            validity = MoveIsValid(game_board, row, col);
+        }
+        if (turn == 1) {
+            game_board[row][col] = '1';
+            cout << "player" << turn << "move" << endl;
+            turn++;
+        }
+        else {
+            game_board[row][col] = '-1';
+            cout << "player" << turn << "move" << endl;
+            turn = -1;
+        }
+    }
+
+    char test3 = '-5';
+    cout << "this is the char " << test3 << endl;
+
 }
