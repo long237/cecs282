@@ -34,7 +34,6 @@ int main(int argc, char* argv[]) {
             break;
         }
 
-        cout << "winner value: " << winner << endl;
         //cheking for the user input
         while (!validity) {
             if (turn == 1) {
@@ -43,8 +42,12 @@ int main(int argc, char* argv[]) {
             else {
                 cout << "O's turn" << endl;
             }
+
             GetMove(row, col);
             validity = MoveIsValid(game_board, row, col);
+            if (validity == false) {
+                cout << "That space is taken or out of bound!!!" << endl;
+            }
         }
 
         //change the elements value in the game board.
@@ -58,16 +61,17 @@ int main(int argc, char* argv[]) {
             game_board[row][col] = -1;
             turn = turn - 1;
         }
+        cout << "" << endl;
     }
 
     //check the board again in case of winning on last move
     winner = CheckWinner(game_board);
     PrintBoard(game_board);
     if (winner == 1) {
-        cout << "Player X wins" << endl;
+        cout << "Player X wins !!!" << endl;
     }
     else if (winner == -1){
-        cout << "Player O wins" << endl;
+        cout << "Player O wins !!!" << endl;
     }
     else {
         cout << "Draw !!!!" << endl;
