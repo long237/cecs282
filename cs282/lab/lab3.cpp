@@ -21,32 +21,32 @@ int SolveQuadratic(const double a, const double b, const double c,  double *xSol
 		}
 	}
 }
-int main(int argc, char* argv[]) {
-	double a = 1;
-	double b = 2;
-	double c = 1;
-	double xSolution1, xSolution2;
-	int numSolution = SolveQuadratic(a ,b , c, &xSolution1, &xSolution2);
-	cout << "Solution 1: " << xSolution1 << endl;
-	cout << "Solution 2: " << xSolution2 << endl;
-	cout << "number of solutions: "<< numSolution <<endl;
-	cout << "" <<endl;
-	a = 1;
-	b = 0;
-	c = 1;
-	numSolution = SolveQuadratic(a ,b , c, &xSolution1, &xSolution2);
-	cout << "Solution 1: " << xSolution1 << endl;
-	cout << "Solution 2: " << xSolution2 << endl;
-	cout << "number of solutions: "<< numSolution <<endl;
-	cout << "" <<endl;
-	a = 1;
-	b = -3;
-	c = -4;
-	numSolution = SolveQuadratic(a ,b , c, &xSolution1, &xSolution2);
-	cout << "Solution 1: " << xSolution1 << endl;
-	cout << "Solution 2: " << xSolution2 << endl;
-	cout << "number of solutions: "<< numSolution <<endl;
-
-}
+//int main(int argc, char* argv[]) {
+//	double a = 1;
+//	double b = 2;
+//	double c = 1;
+//	double xSolution1, xSolution2;
+//	int numSolution = SolveQuadratic(a ,b , c, &xSolution1, &xSolution2);
+//	cout << "Solution 1: " << xSolution1 << endl;
+//	cout << "Solution 2: " << xSolution2 << endl;
+//	cout << "number of solutions: "<< numSolution <<endl;
+//	cout << "" <<endl;
+//	a = 1;
+//	b = 0;
+//	c = 1;
+//	numSolution = SolveQuadratic(a ,b , c, &xSolution1, &xSolution2);
+//	cout << "Solution 1: " << xSolution1 << endl;
+//	cout << "Solution 2: " << xSolution2 << endl;
+//	cout << "number of solutions: "<< numSolution <<endl;
+//	cout << "" <<endl;
+//	a = 1;
+//	b = -3;
+//	c = -4;
+//	numSolution = SolveQuadratic(a ,b , c, &xSolution1, &xSolution2);
+//	cout << "Solution 1: " << xSolution1 << endl;
+//	cout << "Solution 2: " << xSolution2 << endl;
+//	cout << "number of solutions: "<< numSolution <<endl;
+//
+//}
 
 
