@@ -15,17 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lab1.cpp">
+    <ClCompile Include="othello.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lab3.cpp">
+    <ClCompile Include="othellofunct.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="challenge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="testfile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\OthelloGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
