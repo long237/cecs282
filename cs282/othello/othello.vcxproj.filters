@@ -23,7 +23,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\OthelloGame.h">
+    <ClInclude Include="OthelloGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -142,7 +142,7 @@
     <ClCompile Include="othellofunct.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\OthelloGame.h" />
+    <ClInclude Include="OthelloGame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
