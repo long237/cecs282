@@ -41,7 +41,7 @@ bool InBounds(int row, int col) {
 
 bool IsValidMove(const OthelloMatrix& board, int row, int col) {
 	//array out of bound for negative numbers
-	if ((InBounds(row, col) || (row == -1 && col == -1)) && board[row][col] == 0) {
+	if ((InBounds(row, col) && board[row][col] == 0) || row == -1 && col == -1) {
 		return true;
 	}
 	return false;
