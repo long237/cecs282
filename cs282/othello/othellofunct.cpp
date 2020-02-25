@@ -40,7 +40,7 @@ bool InBounds(int row, int col) {
 }
 
 bool IsValidMove(const OthelloMatrix& board, int row, int col) {
-	if (InBounds(row, col) || (row == -1 && col == -1)) {
+	if ((InBounds(row, col) || (row == -1 && col == -1)) && board[row][col] == 0) {
 		return true;
 	}
 	return false;
@@ -50,12 +50,6 @@ int GetValue(const OthelloMatrix& board) {
 	int boardValue = 0;
 	for (int row = 0; row < board.size(); row++) {
 		for (int col = 0; col < board.size(); col++) {
-			//if (board[row][col] == 1) {
-			//	boardValue++;
-			//}
-			//else if(board[row][col] == -1) {
-			//	boardValue--;
-			//}
 			boardValue += board[row][col];
 		}
 	}
@@ -69,7 +63,6 @@ void ApplyMove(OthelloMatrix& board, int row, int col,
 		for (int colDir = -1; colDir < 2; colDir++) {
 			
 			int counter = 0;
-			//int rowWDir = rowDir + row, colWDir = col + colDir;
 			int tempRow = row, tempCol = col;
 
 			while (InBounds(tempRow + rowDir, tempCol + colDir) && board[tempRow + rowDir][tempCol + colDir] != 0) {
@@ -84,25 +77,8 @@ void ApplyMove(OthelloMatrix& board, int row, int col,
 				else {
 					break;
 				}
-
-				//if (InBounds(row + rowDir, col + colDir) || board[row + rowDir][col + colDir] == 0) {
-				//	break;
-				//}
-				//if (board[rowWDir][colWDir] == 0) {
-				//	break;
-				//}
-
-				//if (counter == 0) {
-				//	break;
-				//}
-
-				//else {
-				//	for (int j = 0; j < counter; j++) {
-				//		board[rowWDir - rowDir][colWDir - colDir] = currentPlayer; 
-				//	}
-				//}
 			}
-			cout << "counter: " << counter << endl;
+			//cout << "counter: " << counter << endl;
 			if (board[tempRow][tempCol] == currentPlayer) {
 				for (int j = 0; j < counter; j++) {
 					tempRow -= rowDir;
