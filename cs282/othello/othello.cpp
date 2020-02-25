@@ -36,15 +36,23 @@ int main(int argc, char* argv[]) {
 				break;
 		}
 
-		prevRow = row, prevCol = col;
-		ApplyMove(board, row, col, turn);
-		PrintBoard(board);
-		
-		if (turn == 1) {
-			turn -= 2;
+		else if ((row == -1 && col == -1) && (prevRow = -1 && prevCol == -1)) {
+			cout << "User " << turn << "pass" << endl;
+			continue;
 		}
-		else {
-			turn += 2;
+		prevRow = row, prevCol = col;
+
+		if (row >=0 && col >= 0) {
+			//prevRow = row, prevCol = col;
+			ApplyMove(board, row, col, turn);
+			PrintBoard(board);
+
+			if (turn == 1) {
+				turn -= 2;
+			}
+			else {
+				turn += 2;
+			}
 		}
 	}
 
