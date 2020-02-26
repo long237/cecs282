@@ -27,7 +27,15 @@ int main(int argc, char* argv[]) {
 		int row = -2, col = -3;
 
 		while (!(IsValidMove(board, row, col))) {
-			cout << "Enter where you want to move (x,y): " << endl;
+			if (turn == -1) {
+				cout << "White's turn. Enter where you want to move (x,y): " << endl;
+			}
+			else {
+				cout << "Black's turn. Enter where you want to move (x,y): " << endl;
+			}
+			//if (!InBounds(row, col)) {
+			//	cout << "Invalid move. Enter a different coordinate." << endl;
+			//}
 			GetMove(row, col);
 		}
 
