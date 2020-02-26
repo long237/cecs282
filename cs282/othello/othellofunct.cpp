@@ -80,7 +80,7 @@ void ApplyMove(OthelloMatrix& board, int row, int col,
 					break;
 				}
 			}
-			//cout << "counter: " << counter << endl;
+
 			if (board[tempRow][tempCol] == currentPlayer) {
 				for (int j = 0; j < counter; j++) {
 					tempRow -= rowDir;

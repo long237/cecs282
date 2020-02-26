@@ -5,25 +5,14 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	OthelloMatrix board = OthelloMatrix { 0 };
-	
-	//int row = -2, col = -3;
-	//PrintBoard(board);
-	//board[3][3] = 1;
-	//PrintBoard(board);
-	//cout << "valid? " << IsValidMove(board, 1, 2)<< endl;
-	//while (!(IsValidMove(board, row, col))) {
-	//	cout << "Enter where you want to move (x,y): " << endl;
-	//	GetMove(row, col);
-	//}
-	
 
 	int prevRow = -4, prevCol = -5;
 	char turn = 1;
 	
 	/*while (!(prevRow == -1 && prevCol == -1) && (row == -1 && col == -1)) {*/
 	PrintBoard(board);
-	while (true) {
-
+	//while (true) {
+	for (int i = 0; i < (BOARD_SIZE * BOARD_SIZE); i++) {
 		int row = -2, col = -3;
 
 		while (!(IsValidMove(board, row, col))) {
@@ -40,22 +29,30 @@ int main(int argc, char* argv[]) {
 		}
 
 		if ((row == -1 && col == -1) && (prevRow = -1 && prevCol == -1)) {
-			cout << "We have a tie!" << endl;
+			int winner = GetValue(board);
+
+			if (winner > 0) {
+				cout << "Black wins!!!" << endl;
+			}
+			else if (winner < 0) {
+				cout << "White wins!!!" << endl;
+			}
+			else {
+				cout << "We have a tie!" << endl;
+			}
 				break;
 		}
 
-		else if ((row == -1 && col == -1) || (prevRow = -1 && prevCol == -1)) {
+		if (row == -1 && col == -1) {
 			cout << "User " << (int) turn << "pass" << endl;
-			continue;
 		}
 		prevRow = row, prevCol = col;
 
 		if (InBounds(row,col)) {
-			//prevRow = row, prevCol = col;
 			ApplyMove(board, row, col, turn);
-			PrintBoard(board);
+			//PrintBoard(board);
 		}
-
+		PrintBoard(board);
 		if (turn == 1) {
 			turn -= 2;
 		}
