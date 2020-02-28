@@ -60,18 +60,23 @@ int GetValue(const OthelloMatrix& board) {
 
 void ApplyMove(OthelloMatrix& board, int row, int col,
 	char currentPlayer) {
+	//Set the chosen position to the player turn.
 	board[row][col] = currentPlayer;
+	//Generate direction to check for matching when add to orgin coordinate
 	for (int rowDir = -1; rowDir < 2; rowDir++) {
 		for (int colDir = -1; colDir < 2; colDir++) {
 			
+			//temporary row and column to move around to check. 
 			int counter = 0;
 			int tempRow = row, tempCol = col;
 
+			//Keep moving in that direction as long as it is inbound and the space is not empty
 			while (InBounds(tempRow + rowDir, tempCol + colDir) && board[tempRow + rowDir][tempCol + colDir] != 0) {
 
 				tempRow += rowDir;
 				tempCol += colDir;
 
+				//increase the counter if find enemy pieces
 				if (board[tempRow][tempCol] != currentPlayer) {
 					counter++;
 				}
@@ -81,6 +86,7 @@ void ApplyMove(OthelloMatrix& board, int row, int col,
 				}
 			}
 
+			//Only go back and flip if encounter our own piece at the other end.
 			if (board[tempRow][tempCol] == currentPlayer) {
 				for (int j = 0; j < counter; j++) {
 					tempRow -= rowDir;

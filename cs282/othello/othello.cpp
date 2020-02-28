@@ -5,14 +5,21 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	OthelloMatrix board = OthelloMatrix { 0 };
+	//Initialize board with 4 already placed pieces
+	board[3][3] = -1;
+	board[4][4] = -1;
+	board[3][4] = 1;
+	board[4][3] = 1;
+
+	//variables to keep track of the previous player move
+	//to stop when both player put (-1,-1)
 
 	int prevRow = -4, prevCol = -5;
 	char turn = 1;
 	
-	/*while (!(prevRow == -1 && prevCol == -1) && (row == -1 && col == -1)) {*/
 	PrintBoard(board);
-	//while (true) {
-	for (int i = 0; i < (BOARD_SIZE * BOARD_SIZE); i++) {
+	//Keep running as long as it is true
+	while (true) {
 		int row = -2, col = -3;
 
 		while (!(IsValidMove(board, row, col))) {
@@ -22,12 +29,10 @@ int main(int argc, char* argv[]) {
 			else {
 				cout << "Black's turn. Enter where you want to move (x,y): " << endl;
 			}
-			//if (!InBounds(row, col)) {
-			//	cout << "Invalid move. Enter a different coordinate." << endl;
-			//}
 			GetMove(row, col);
 		}
 
+		//Call getValue() to check for winner when both player cannot move
 		if ((row == -1 && col == -1) && (prevRow = -1 && prevCol == -1)) {
 			int winner = GetValue(board);
 
@@ -43,14 +48,11 @@ int main(int argc, char* argv[]) {
 				break;
 		}
 
-		if (row == -1 && col == -1) {
-			cout << "User " << (int) turn << "pass" << endl;
-		}
 		prevRow = row, prevCol = col;
 
+		//check the input to be positive and inbound before passing it to Applymove()
 		if (InBounds(row,col)) {
 			ApplyMove(board, row, col, turn);
-			//PrintBoard(board);
 		}
 		PrintBoard(board);
 		if (turn == 1) {
