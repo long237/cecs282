@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoardDirection.h" />
     <ClInclude Include="BoardPostition.h" />
   </ItemGroup>
   <ItemGroup>
