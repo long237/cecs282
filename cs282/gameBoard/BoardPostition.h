@@ -16,8 +16,6 @@ public:
 
 	operator std::string() const;
 
-	friend std::ostream& operator<<(std::ostream& lhs, BoardPosition rhs);
-
 	friend std::istream& operator>> (std::istream& lhs, BoardPosition& rhs);
 
 	bool operator== (BoardPosition rhs);
@@ -28,5 +26,7 @@ public:
 
 	bool inBounds(int rows, int columns);
 
-	static std::vector<BoardPosition> GetRectangularPositions(int rows, int columns); 
+	static std::vector<BoardPosition> GetRectangularPositions(int rows, int columns);
 };
+
+std::ostream& operator<<(std::ostream& lhs, BoardPosition rhs);
