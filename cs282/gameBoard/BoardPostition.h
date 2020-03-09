@@ -1,19 +1,20 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 class BoardPosition {
 private:
-	int row, col;
+	int mRow, mCol;
 
 
 public:
 	BoardPosition();
 	BoardPosition(int row, int col);
 
-	inline int getRow() const { return row; }
-	inline int getCol() const { return col; }
+	inline int getRow() const { return mRow; }
+	inline int getCol() const { return mCol; }
 
-	operator std::string();
+	operator std::string() const;
 
 	friend std::ostream& operator<<(std::ostream& lhs, BoardPosition rhs);
 
@@ -25,5 +26,7 @@ public:
 
 	bool inBounds(int boardSize);
 
+	bool inBounds(int rows, int columns);
 
+	static std::vector<BoardPosition> GetRectangularPositions(int rows, int columns); 
 };
