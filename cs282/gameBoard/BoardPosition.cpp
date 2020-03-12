@@ -1,7 +1,8 @@
-#include "BoardPostition.h";
+#include "BoardPostition.h"
 #include <iostream>
 #include <sstream> //string input and output
 #include <vector>
+#include "BoardDirection.h"
 using namespace std;
 
 BoardPosition::BoardPosition() : mRow(0), mCol(0) {
@@ -47,6 +48,10 @@ bool BoardPosition::operator< (BoardPosition rhs) {
 		return false;
 	}
 	return true;
+}
+
+BoardPosition BoardPosition::operator+ (BoardDirection dir) {
+	return BoardPosition(mRow + dir.getColChange(), mCol + dir.getColChange());
 }
 
 bool BoardPosition::inBounds(int boardSize) {

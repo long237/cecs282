@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-
+#include "BoardDirection.h"
 class BoardPosition {
 private:
 	int mRow, mCol;
@@ -21,6 +21,8 @@ public:
 	bool operator== (BoardPosition rhs);
 
 	bool operator< (BoardPosition rhs);
+
+	BoardPosition operator+ (BoardDirection dir);
 
 	bool inBounds(int boardSize);
 
