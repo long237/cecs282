@@ -15,12 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Documents\cs282note\Lectures\DynamicMemory\LinkedStack\ModernLinkedList.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernLinkedList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Documents\cs282note\Lectures\DynamicMemory\LinkedStack\ModernLinkedList.h">
+    <ClInclude Include="ModernLinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

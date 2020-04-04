@@ -138,10 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Documents\cs282note\Lectures\DynamicMemory\LinkedStack\ModernLinkedList.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModernLinkedList.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Documents\cs282note\Lectures\DynamicMemory\LinkedStack\ModernLinkedList.h" />
+    <ClInclude Include="ModernLinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
