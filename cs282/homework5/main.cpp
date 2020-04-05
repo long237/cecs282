@@ -5,57 +5,77 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	ModernLinkedList testList;
 
-	cout << "List before adding: " << endl;
+	cout << "Instantiate an empty linked list: " << endl;
 	testList.PrintList();
+	cout << "" << endl;
+
+
+	cout << "Add intergers using PushFront(): " << endl;
+	cout << "List before add: ";
+	testList.PrintList();
+
 	testList.PushFront(2);
+	testList.PrintList();
 	testList.PushFront(3);
+	testList.PrintList();
 	testList.PushFront(4);
 	testList.PrintList();
 	testList.PushFront(5);
-	cout << "List after adding: " << endl;
+	testList.PrintList();
+	cout << "" << endl;
+
+	cout << "Add intergers using PushBack(): " << endl;
+	cout << "List before add: ";
 	testList.PrintList();
 
-	cout << "testing pushBack: " << endl;
+	testList.PushBack(6);
+	testList.PrintList();
+	testList.PushBack(7);
+	testList.PrintList();
 	testList.PushBack(8);
 	testList.PrintList();
+	cout << "" << endl;
 
-	cout << "Size of list: " << testList.Size() << endl;
-
-	cout << "Testing insert: " << endl;
-	testList.Insert(2, 11);
+	cout << "Inserting 32 at index 2 using Insert(): " << endl;
+	cout << "List before insertion: ";
 	testList.PrintList();
 
-	cout << "Size of list: " << testList.Size() << endl;
-
-	//cout << "Removing" << endl;
-	//testList.PopBack();
-	//testList.PrintList();
-
-	//cout << "Size of list: " << testList.Size() << endl;
-
-	cout << "Testing remove at index: " << endl;
-	testList.RemoveAt(2);
+	testList.Insert(2, 32);
 	testList.PrintList();
-	cout << "Size of list: " << testList.Size() << endl;
+	cout << "" << endl;
 
-	cout << "Testing popFront: " << endl;
+	cout << "Accessing data in a Node using [] operator: " << endl;
+	cout << "List: ";
+	testList.PrintList();
+
+	cout << "Indexing item at index 4 in the list: "<< testList[4] << endl;
+	cout << "" << endl;
+
+	cout << "Using PopFront() to remove Node at the front: " << endl;
+	cout << "List before removing: ";
+	testList.PrintList();
+
 	testList.PopFront();
 	testList.PrintList();
-	//testList.PopFront();
-	//testList.PrintList();
-	//testList.PopFront();
-	//testList.PrintList();
-	//testList.PopFront();
-	//testList.PrintList();
-	//testList.PopFront();
-	//testList.PrintList();
-	cout << "Size of list: " << testList.Size() << endl;
+	testList.PopFront();
+	testList.PrintList();
+	cout << "" << endl;
 
-	cout << "Testing [] operator: " << testList[3] <<endl; 
+	cout << "Using PopBack() to remove Node at the back: " << endl;
+	cout << "List before removing: ";
+	testList.PrintList();
 
-	cout << "Testing clear: " << endl;
+	testList.PopBack();
+	testList.PrintList();
+	testList.PopBack();
+	testList.PrintList();
+	cout << "" << endl;
+
+	cout << "Clearing the list using Clear(): " << endl;
+	cout << "List before clearing: ";
+	testList.PrintList();
+
 	testList.Clear();
 	testList.PrintList();
-	cout << "Size of list: " << testList.Size() << endl;
-
+	cout << "" << endl;
 }
