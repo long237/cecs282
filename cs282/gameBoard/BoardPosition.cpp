@@ -54,11 +54,11 @@ BoardPosition BoardPosition::operator+ (BoardDirection dir) {
 	return BoardPosition(mRow + dir.getColChange(), mCol + dir.getColChange());
 }
 
-bool BoardPosition::inBounds(int boardSize) {
+bool BoardPosition::InBounds(int boardSize) {
 	return ((mRow > 0) && (mRow < boardSize -1) && (mCol > 0) && (mCol < boardSize - 1));
 }
 
-bool BoardPosition::inBounds(int row, int column) {
+bool BoardPosition::InBounds(int row, int column) {
 	return ((mRow > 0) && (mRow < row) && (mCol > 0) && (mCol < column));
 }
 

@@ -1,4 +1,5 @@
 #pragma once
+
 #include <iostream>
 #include <vector>
 #include "BoardDirection.h"
@@ -11,8 +12,8 @@ public:
 	BoardPosition();
 	BoardPosition(int row, int col);
 
-	inline int getRow() const { return mRow; }
-	inline int getCol() const { return mCol; }
+	inline int GetRow() const { return mRow; }
+	inline int GetCol() const { return mCol; }
 
 	operator std::string() const;
 
