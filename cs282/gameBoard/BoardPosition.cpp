@@ -51,7 +51,7 @@ bool BoardPosition::operator< (BoardPosition rhs) {
 }
 
 BoardPosition BoardPosition::operator+ (BoardDirection dir) {
-	return BoardPosition(mRow + dir.getColChange(), mCol + dir.getColChange());
+	return BoardPosition(mRow + dir.getRowChange(), mCol + dir.getColChange());
 }
 
 bool BoardPosition::InBounds(int boardSize) {

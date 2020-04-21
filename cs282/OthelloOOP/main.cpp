@@ -9,13 +9,14 @@
 
 using namespace std;
 
-int main_(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 	// Initialization
 	auto board = std::make_shared<OthelloBoard>(); // the state of the game board
 	OthelloView v(board); // a View for outputting the board via operator<<
 	string userInput; // a string to hold the user's command choice
 
-
+	//unique_ptr<BoardPosition> b1 = make_unique<BoardPosition>(2, 3);
+	//unique_ptr<BoardPosition> b2 = *b1;
 
 	// Start with this DEBUGGING CODE to make sure your basic OthelloMove and 
 	// OthelloBoard classes work, then remove it when you are ready to work

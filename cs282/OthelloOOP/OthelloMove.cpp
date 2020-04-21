@@ -8,5 +8,5 @@ bool OthelloMove::operator==(const OthelloMove& rhs) {
 
 OthelloMove::operator std::string() const {
 	//print the position of the move using the BoardPosition string()
-	return mPosition.operator std::string;
+	return mPosition.operator std::string();
 }
