@@ -54,7 +54,6 @@ vector<unique_ptr<OthelloMove>> OthelloBoard::GetPossibleMoves() const {
 
 void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 	
-
 	//Set the chosen position to the player value
 	mBoard[m->mPosition.GetRow()][m->mPosition.GetCol()] = mCurrentPlayer;
 	//Adjust the value of the board after placing the new piece
@@ -68,13 +67,13 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 		int counterForFlip = 0;
 		//Keep moving in that direction as long as it is inbound and the position is not empty
 		//while (InBounds(OneStepInDirection) && (mBoard[OneStepInDirection.GetRow()][OneStepInDirection.GetCol()] != Player::EMPTY)) {
-		cout << "rowChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getRowChange()) << " colChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getColChange()) << endl;
+		//cout << "rowChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getRowChange()) << " colChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getColChange()) << endl;
 		while (InBounds(OneStepInDirection)) {
-			cout << "Step in direction: " << OneStepInDirection << endl;
+			//cout << "Step in direction: " << OneStepInDirection << endl;
 			//Increase the counter if found an enemy piece
-			cout << "if statement value: " << PositionIsEnemy(OneStepInDirection, mCurrentPlayer) << endl;
+			//cout << "if statement value: " << PositionIsEnemy(OneStepInDirection, mCurrentPlayer) << endl;
 			if (PositionIsEnemy(OneStepInDirection, mCurrentPlayer)) {
-				cout << "increase the counter" << endl;
+				//cout << "increase the counter" << endl;
 				OneStepInDirection = OneStepInDirection + BoardDirection::CARDINAL_DIRECTION[direction];
 				counterForFlip++;
 			}
@@ -83,21 +82,15 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 				break;
 			}
 		}
-		cout << "counter for flip: " << counterForFlip << endl;
+		//cout << "counter for flip: " << counterForFlip << endl;
 		//Only go back and flip if encounter our own piece at the other end
 		//OneStepInDirection variable is now at the end of the direction
-		//if (mBoard[OneStepInDirection.GetRow()][OneStepInDirection.GetCol()] == mCurrentPlayer) {
-		//	//Iterate the same amount of time as the amount of pieces required to flip
-		//	for (int i = 0; i < counterForFlip; i++) {
-		//		//flip the pieces starting from the user position in one direction
-		//		mBoard[m->mPosition.GetRow()][m->mPosition.GetCol()] = mCurrentPlayer;
-		//		//Add the Currentvalue with the with 2 time the amount of the CurrentPlayer when flipping
-		//		mCurrentValue = mCurrentValue + (2 * static_cast<int>(mCurrentPlayer));
-		//	}
-		//}
-
 		char rowDir = BoardDirection::CARDINAL_DIRECTION[direction].getRowChange();
 		char colDir = BoardDirection::CARDINAL_DIRECTION[direction].getColChange();
+
+		OthelloMove::FlipSet flipSet = OthelloMove::FlipSet(counterForFlip, BoardDirection::CARDINAL_DIRECTION[direction]);
+		m->AddFlipSet(flipSet);
+
 		if (mBoard[OneStepInDirection.GetRow()][OneStepInDirection.GetCol()] == mCurrentPlayer) {
 			//Iterate the same amount of time as the amount of pieces required to flip
 			for (int i = 0; i < counterForFlip; i++) {
@@ -112,4 +105,8 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 	mHistory.push_back(std::move(m));
 	//Update the player turn by multiplying the current player by -1
 	mCurrentPlayer = static_cast<Player>((-1) * static_cast<int>(mCurrentPlayer));
+}
+
+void OthelloBoard::UndoLastMove() {
+	//add code into this function
 }

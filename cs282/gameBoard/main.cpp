@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 	cout << "Inbound test" << endl;
 	int square = 8;
 	cout << "Board size: " << square << "x" << square << endl;
-	while (!pos0.inBounds(square)) {
+	while (!pos0.InBounds(square)) {
 		cout << "Enter a coordinate: " << endl;
 		cin >> pos0;
 	}
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 	cout << "Inbound non square test" << endl;
 	int row = 6, col = 8;
 	cout << "Board size: " << row << "x" << col << endl;
-	while (!pos6.inBounds(row, col)) {
+	while (!pos6.InBounds(row, col)) {
 		cout << "Enter a coordinate here: " << endl;
 		cin >> pos6;
 	}

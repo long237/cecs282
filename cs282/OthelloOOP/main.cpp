@@ -11,42 +11,72 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	// Initialization
-	auto board = std::make_shared<OthelloBoard>(); // the state of the game board
-	OthelloView v(board); // a View for outputting the board via operator<<
-	string userInput; // a string to hold the user's command choice
+	//auto board = std::make_shared<OthelloBoard>(); // the state of the game board
+	//OthelloView v(board); // a View for outputting the board via operator<<
+	//string userInput; // a string to hold the user's command choice
 
-	//unique_ptr<BoardPosition> b1 = make_unique<BoardPosition>(2, 3);
-	//unique_ptr<BoardPosition> b2 = *b1;
+	//// Start with this DEBUGGING CODE to make sure your basic OthelloMove and 
+	//// OthelloBoard classes work, then remove it when you are ready to work
+	//// on the real main.
+	//cout << "Initial board:" << endl;
+	//cout << v << endl;
 
-	// Start with this DEBUGGING CODE to make sure your basic OthelloMove and 
-	// OthelloBoard classes work, then remove it when you are ready to work
-	// on the real main.
-	cout << "Initial board:" << endl;
-	cout << v << endl;
-	unique_ptr<OthelloMove> m{ v.ParseMove("(3, 2)") };
-	cout << "Applying the move " << *m << endl;
-	board->ApplyMove(std::move(m));
-	cout << endl << v << endl; // should show a changed board.
+	////cout << "Possible move: " << endl;
+	////auto posMove = board->GetPossibleMoves();
+	////cout << "Size of Possible move: " << posMove.size() << endl;
+	////for (auto itr = posMove.begin(); itr != posMove.end(); itr++) {
+	////	cout << *itr << ", ";
+	////}
 
-	m = v.ParseMove("(4, 2)");
-	cout << "Applying the move " << *m << endl;
-	board->ApplyMove(std::move(m));
-	cout << endl << v << endl;
+	//unique_ptr<OthelloMove> m{ v.ParseMove("(3, 2)") };
+	//cout << "Applying the move " << *m << endl;
+	//board->ApplyMove(std::move(m));
+	//cout << endl << v << endl; // should show a changed board.
+	//cout << "value of board: " << board->GetValue() << endl;
 
-	m = v.ParseMove("(5, 2)");
-	cout << "Applying the move " << *m << endl;
-	board->ApplyMove(std::move(m));
-	cout << endl << v << endl;
+	//cout << "Possible move: " << endl;
+	//auto posMove = board->GetPossibleMoves();
+	//cout << "Size of Possible move: " << posMove.size() << endl;
+	//for (auto itr = posMove.begin(); itr != posMove.end(); itr++) {
+	//	cout << *itr << ", " ;
+	//}
+
+	//m = v.ParseMove("(4, 2)");
+	//cout << "Applying the move " << *m << endl;
+	//board->ApplyMove(std::move(m));
+	//cout << endl << v << endl;
+	//cout << "value of board: " << board->GetValue() << endl;
+
+	//m = v.ParseMove("(5, 2)");
+	//cout << "Applying the move " << *m << endl;
+	//board->ApplyMove(std::move(m));
+	//cout << endl << v << endl;
+	//cout << "value of board: " << board->GetValue() << endl;
+	
+	//cout << "Move history (latest-earliest): " << endl;
+	//auto history = board->GetMoveHistory();
+	//for (auto itr = history.rbegin(); itr != history.rend(); itr ++ ) {
+	//	cout << *itr;
+	//}
 
 	// END OF DEBUGGING CODE
 
 	// Main loop
 	do {
 		// Print the game board using the OthelloView object
+		auto board = make_shared<OthelloBoard>();
+		OthelloView view(board);
+		cout << "Initial board: " << endl;
+		cout << view << endl;
 
 	   // Print all possible moves
-
+		auto PossibleMoveList = board->GetPossibleMoves();
+		for (auto itr = PossibleMoveList.begin(); itr != PossibleMoveList.end(); itr++) {
+			cout << *itr << ", ";
+		}
+		cout << "" << endl;
 	   // Ask to input a command
+		string userCommand = GetInput();
 
 	   // Command loop:
 		  // move (r,c)
@@ -56,4 +86,14 @@ int main(int argc, char* argv[]) {
 		  // quit
 
 	} while (true); // you may want to change the condition
+
 }
+
+string GetInput() {
+	string userInput = "";
+	while (userInput.length() < 0) {
+		cin >> userInput;
+	}
+	return userInput;
+}
+
