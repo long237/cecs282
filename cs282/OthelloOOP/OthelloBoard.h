@@ -79,6 +79,8 @@ public:
 		return mBoard[position.GetRow()][position.GetCol()];
 	}
 
+	void IsFinished();
+
 private:
 	// OthelloView needs access to mBoard for printing
 	friend class OthelloView;
@@ -105,6 +107,4 @@ private:
 		Player atPosition = GetPlayerAtPosition(position);
 		return atPosition != Player::EMPTY && atPosition != p;
 	}
-
-
 };
