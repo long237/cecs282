@@ -6,7 +6,7 @@
 #include <sstream>
 #include <vector>
 #include <memory>
-
+#include <algorithm>
 using namespace std;
 
 string GetInput() {
@@ -88,14 +88,14 @@ int main(int argc, char* argv[]) {
 
 	// Main loop
 	string userCommand;
+	auto board = make_shared<OthelloBoard>();
+	OthelloView view(board);
 	do {
 		// Print the game board using the OthelloView object
-		auto board = make_shared<OthelloBoard>();
-		OthelloView view(board);
-		cout << "Initial board: " << endl;
 		cout << view << endl;
 
 	   // Print all possible moves
+		cout << "List of possible moves: " << endl;
 		auto PossibleMoveList = board->GetPossibleMoves();
 		for (auto itr = PossibleMoveList.begin(); itr != PossibleMoveList.end(); itr++) {
 			cout << *(*itr) << ", ";
@@ -103,31 +103,54 @@ int main(int argc, char* argv[]) {
 		cout << "" << endl;
 	   // Ask to input a command
 		cout << "Enter a command: " << endl;
-		userCommand = GetInput();
-
+		getline(cin, userCommand);
+		istringstream parser{ userCommand };
+		string firstWord;
+		parser >> firstWord;
+		cout << "first word: " << firstWord << endl;
 	   // Command loop:
 		  // move (r,c)
 		  // undo n
 		  // showValue
 		  // showHistory
 		  // quit
-		if (userCommand == "move") {
-
+		//if (userCommand == "move") {
+		if (firstWord == "move") {
+			string coordinates = userCommand.substr(5, 10);
+			cout << "coordinates: " << coordinates << endl;
+			unique_ptr<OthelloMove> userMove { view.ParseMove(coordinates) };
+			//If the move is valid then apply it
+			if (find(PossibleMoveList.begin(), PossibleMoveList.end(), userMove) != PossibleMoveList.end()) {
+				board->ApplyMove(move(userMove));
+				cout << "Applying the move: " << *userMove << endl;
+			}
+			else {
+				cout << "The move is invalid!!!" << endl;
+			}
 		}
 		else if (userCommand == "undo") {
 
 		}
 		else if (userCommand == "showValue") {
 			cout << "Value of the board: " << board->GetValue() << endl;
+			cout << "" << endl;
 		}
 		//Add a print line for which player apply the move
 		else if (userCommand == "showHistory") {
+			cout << "History: " << endl;
 			auto &history = board->GetMoveHistory();
 			for (auto itr = history.rbegin(); itr != history.rend(); itr++ ) {
+				if (board->GetCurrentPlayer() == OthelloBoard::Player::BLACK) {	//if the current player is Black then the previoes player is White
+					cout << "White's move";
+				}
+				else {
+					cout << "Black's move";
+				}
 				cout << *(*itr) << endl;
 			}
+			cout << "" << endl;
 		}
-	} while (userCommand != "quit"); // you may want to change the condition
+	} while ((userCommand != "quit") || board->IsFinished()); // you may want to change the condition
 
 
 }

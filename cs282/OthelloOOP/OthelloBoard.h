@@ -79,7 +79,7 @@ public:
 		return mBoard[position.GetRow()][position.GetCol()];
 	}
 
-	void IsFinished();
+	bool IsFinished() const;
 
 private:
 	// OthelloView needs access to mBoard for printing

@@ -63,7 +63,7 @@ vector<unique_ptr<OthelloMove>> OthelloBoard::GetPossibleMoves() const {
 void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 	
 	//only execute these if it not a pass
-	if ((m->mPosition.GetRow() > 0) && m->mPosition.GetCol() > 0) {
+	if (InBounds(m->mPosition)) {
 		//Set the chosen position to the player value
 		mBoard[m->mPosition.GetRow()][m->mPosition.GetCol()] = mCurrentPlayer;
 		//Adjust the value of the board after placing the new piece
@@ -121,4 +121,9 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 
 void OthelloBoard::UndoLastMove() {
 	//add code into this function
+}
+
+//comparing the last move in history to the second to last move in history, return true if they are the same.
+bool OthelloBoard::IsFinished() const{
+	return ( *(mHistory.back()) == *(*(mHistory.end() - 2)) );
 }

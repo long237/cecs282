@@ -37,8 +37,6 @@ unique_ptr<OthelloMove> OthelloView::ParseMove(const string& strFormat) {
 	cout << "row: " << row << " col: " << col << endl;
 	unique_ptr<OthelloMove> PlayerMove = make_unique<OthelloMove>(BoardPosition(row, col));
 
-	//how to yield ownership at the end? 
-	//like this?
 	return move(PlayerMove);
 }
 
