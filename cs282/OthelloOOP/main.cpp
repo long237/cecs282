@@ -17,6 +17,10 @@ string GetInput() {
 	return userInput;
 }
 
+bool IsEqual(const unique_ptr<OthelloMove> &move) {
+	return true;
+}
+
 int main(int argc, char* argv[]) {
 	//// Initialization
 	//auto board = std::make_shared<OthelloBoard>(); // the state of the game board
@@ -139,8 +143,12 @@ int main(int argc, char* argv[]) {
 		else if (userCommand == "showHistory") {
 			cout << "History: " << endl;
 			auto &history = board->GetMoveHistory();
+			OthelloBoard::Player tempPlayer = board->GetCurrentPlayer();	//the temPlayer is the current player
 			for (auto itr = history.rbegin(); itr != history.rend(); itr++ ) {
-				if (board->GetCurrentPlayer() == OthelloBoard::Player::BLACK) {	//if the current player is Black then the previoes player is White
+				//get the previous player by multiplying -1 and keep doing that to the the previous of previous
+				//alternating
+				tempPlayer = static_cast<OthelloBoard::Player>(static_cast<int>(tempPlayer) * (-1));
+				if (tempPlayer == OthelloBoard::Player::WHITE) {
 					cout << "White's move";
 				}
 				else {

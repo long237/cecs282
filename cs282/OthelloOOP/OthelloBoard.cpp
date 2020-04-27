@@ -87,7 +87,7 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 					OneStepInDirection = OneStepInDirection + BoardDirection::CARDINAL_DIRECTION[direction];
 					counterForFlip++;
 				}
-
+				//Break the loop if encounter an Empty space or ourselves
 				else {
 					break;
 				}
@@ -95,17 +95,16 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 			//cout << "counter for flip: " << counterForFlip << endl;
 			//Only go back and flip if encounter our own piece at the other end
 			//OneStepInDirection variable is now at the end of the direction
-			char rowDir = BoardDirection::CARDINAL_DIRECTION[direction].getRowChange();
-			char colDir = BoardDirection::CARDINAL_DIRECTION[direction].getColChange();
-
+			BoardPosition tempPosition = m->mPosition;
 			if (mBoard[OneStepInDirection.GetRow()][OneStepInDirection.GetCol()] == mCurrentPlayer) {
 				//Add flipset before flipping
 				OthelloMove::FlipSet flipSet = OthelloMove::FlipSet(counterForFlip, BoardDirection::CARDINAL_DIRECTION[direction]);
 				m->AddFlipSet(flipSet);
 				//Iterate the same amount of time as the amount of pieces required to flip
 				for (int i = 0; i < counterForFlip; i++) {
+					tempPosition = tempPosition + BoardDirection::CARDINAL_DIRECTION[direction];
 					//flip the pieces starting from the user position in one direction
-					mBoard[m->mPosition.GetRow() + rowDir][m->mPosition.GetCol() + colDir] = mCurrentPlayer;
+					mBoard[tempPosition.GetRow()][tempPosition.GetCol()] = mCurrentPlayer;
 					//Add the Currentvalue with the with 2 time the amount of the CurrentPlayer when flipping
 					mCurrentValue = mCurrentValue + (2 * static_cast<int>(mCurrentPlayer));
 				}
@@ -120,7 +119,22 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 }
 
 void OthelloBoard::UndoLastMove() {
-	//add code into this function
+	auto &lastMove = mHistory.back();
+	//Each flipset is one cardinal direction, iterate through all the direction to flip back
+	for (int index = 0; index < lastMove->mFlips.size(); index++) {
+		//a temp position starting from the last move position
+		BoardPosition tempPos = lastMove->mPosition;
+		OthelloMove::FlipSet flipset = lastMove->mFlips[index];
+		//take one step in the Cardinal direction
+		//flip pieces in one direction
+		for (int i = 0; i < flipset.mFlipCount; i++) {
+			tempPos = tempPos + flipset.mDirection;
+			mBoard[tempPos.GetRow()][tempPos.GetCol()] = mCurrentPlayer;
+		}
+	}
+
+	mHistory.pop_back();
+	mCurrentPlayer = static_cast<OthelloBoard::Player> ((-1) * static_cast<int>(mCurrentPlayer));
 }
 
 //comparing the last move in history to the second to last move in history, return true if they are the same.
