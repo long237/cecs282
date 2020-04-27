@@ -94,6 +94,8 @@ int main(int argc, char* argv[]) {
 	string userCommand;
 	auto board = make_shared<OthelloBoard>();
 	OthelloView view(board);
+	bool condition = false;
+	//if (board->GetMoveHistory().size() > 2)
 	do {
 		// Print the game board using the OthelloView object
 		cout << view << endl;
@@ -124,16 +126,36 @@ int main(int argc, char* argv[]) {
 			cout << "coordinates: " << coordinates << endl;
 			unique_ptr<OthelloMove> userMove { view.ParseMove(coordinates) };
 			//If the move is valid then apply it
-			if (find(PossibleMoveList.begin(), PossibleMoveList.end(), userMove) != PossibleMoveList.end()) {
-				board->ApplyMove(move(userMove));
-				cout << "Applying the move: " << *userMove << endl;
+			cout << "user move: " << *userMove << endl;
+			bool match = false;
+			for (auto iterator = PossibleMoveList.begin(); iterator != PossibleMoveList.end(); iterator++) {
+				if (*userMove == *(*iterator)) {
+					match = true;
+					cout << "Applying the move: " << *userMove << endl;
+					board->ApplyMove(move(userMove));
+					break;
+				}
 			}
-			else {
+			//if (match == true) {
+			//	board->ApplyMove(move(userMove));
+			//	cout << "Applying the move: " << *userMove << endl;
+			//}
+			//cout << "The move is invalid!!!" << endl;
+			if (match == false) {
 				cout << "The move is invalid!!!" << endl;
 			}
 		}
-		else if (userCommand == "undo") {
-
+		else if (firstWord == "undo") {
+			int numberUndo = stoi(userCommand.substr(5, userCommand.size()));
+			cout << "Undoing the last move "<< numberUndo << endl;
+			if (numberUndo <= board->GetMoveHistory().size()) {
+				for (int i = 0; i < numberUndo; i++) {
+					board->UndoLastMove();
+				}
+			}
+			else {
+				cout << "Too many undo!!!" << endl;
+			}
 		}
 		else if (userCommand == "showValue") {
 			cout << "Value of the board: " << board->GetValue() << endl;
@@ -158,9 +180,12 @@ int main(int argc, char* argv[]) {
 			}
 			cout << "" << endl;
 		}
-	} while ((userCommand != "quit") || board->IsFinished()); // you may want to change the condition
+		if (board->GetMoveHistory().size() >= 2) {
+			condition = board->IsFinished();
+		}
+	} while ((userCommand != "quit") || condition); // you may want to change the condition
 
-
+	cout << "Game finished!!" << endl;
 }
 
 

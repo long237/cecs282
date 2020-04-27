@@ -63,7 +63,8 @@ vector<unique_ptr<OthelloMove>> OthelloBoard::GetPossibleMoves() const {
 void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 	
 	//only execute these if it not a pass
-	if (InBounds(m->mPosition)) {
+	//if (InBounds(m->mPosition)) {
+	if (!m->IsPass()) {
 		//Set the chosen position to the player value
 		mBoard[m->mPosition.GetRow()][m->mPosition.GetCol()] = mCurrentPlayer;
 		//Adjust the value of the board after placing the new piece
@@ -119,18 +120,26 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 }
 
 void OthelloBoard::UndoLastMove() {
+	
 	auto &lastMove = mHistory.back();
-	//Each flipset is one cardinal direction, iterate through all the direction to flip back
-	for (int index = 0; index < lastMove->mFlips.size(); index++) {
-		//a temp position starting from the last move position
-		BoardPosition tempPos = lastMove->mPosition;
-		OthelloMove::FlipSet flipset = lastMove->mFlips[index];
-		//take one step in the Cardinal direction
-		//flip pieces in one direction
-		for (int i = 0; i < flipset.mFlipCount; i++) {
-			tempPos = tempPos + flipset.mDirection;
-			mBoard[tempPos.GetRow()][tempPos.GetCol()] = mCurrentPlayer;
+	//Execute these lines if the move is not a pass
+	if (!lastMove->IsPass()) {
+		//Each flipset is one cardinal direction, iterate through all the direction to flip back
+		for (int index = 0; index < lastMove->mFlips.size(); index++) {
+			//a temp position starting from the last move position
+			BoardPosition tempPos = lastMove->mPosition;
+			OthelloMove::FlipSet flipset = lastMove->mFlips[index];
+			//take one step in the Cardinal direction
+			//flip pieces in one direction
+			for (int i = 0; i < flipset.mFlipCount; i++) {
+				tempPos = tempPos + flipset.mDirection;
+				mBoard[tempPos.GetRow()][tempPos.GetCol()] = mCurrentPlayer;
+				mCurrentValue = mCurrentValue + (2 * static_cast<int>(mCurrentPlayer));
+			}
 		}
+
+		mCurrentValue = mCurrentValue + static_cast<int>(mCurrentPlayer);
+		mBoard[lastMove->mPosition.GetRow()][lastMove->mPosition.GetCol()] = Player::EMPTY;
 	}
 
 	mHistory.pop_back();
