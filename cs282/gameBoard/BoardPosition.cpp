@@ -55,11 +55,11 @@ BoardPosition BoardPosition::operator+ (BoardDirection dir) {
 }
 
 bool BoardPosition::InBounds(int boardSize) {
-	return ((mRow > 0) && (mRow < boardSize -1) && (mCol > 0) && (mCol < boardSize - 1));
+	return ((mRow >= 0) && (mRow <= boardSize -1) && (mCol >= 0) && (mCol <= boardSize - 1));
 }
 
 bool BoardPosition::InBounds(int row, int column) {
-	return ((mRow > 0) && (mRow < row) && (mCol > 0) && (mCol < column));
+	return ((mRow >= 0) && (mRow <= row) && (mCol >= 0) && (mCol <= column));
 }
 
 std::vector<BoardPosition> BoardPosition::GetRectangularPositions(int rows, int columns) {

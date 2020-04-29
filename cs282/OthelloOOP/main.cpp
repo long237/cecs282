@@ -2,6 +2,7 @@
 #include "OthelloView.h"
 #include "OthelloMove.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -95,7 +96,7 @@ int main(int argc, char* argv[]) {
 	auto board = make_shared<OthelloBoard>();
 	OthelloView view(board);
 	bool condition = false;
-	//if (board->GetMoveHistory().size() > 2)
+	ifstream testCase{ "testCase.txt" };
 	do {
 		// Print the game board using the OthelloView object
 		cout << view << endl;
@@ -109,11 +110,12 @@ int main(int argc, char* argv[]) {
 		cout << "" << endl;
 	   // Ask to input a command
 		cout << "Enter a command: " << endl;
-		getline(cin, userCommand);
+		getline(testCase, userCommand);
+		//getline(cin, userCommand);
 		istringstream parser{ userCommand };
 		string firstWord;
 		parser >> firstWord;
-		cout << "first word: " << firstWord << endl;
+		//cout << "first word: " << firstWord << endl;
 	   // Command loop:
 		  // move (r,c)
 		  // undo n
@@ -122,11 +124,14 @@ int main(int argc, char* argv[]) {
 		  // quit
 		//if (userCommand == "move") {
 		if (firstWord == "move") {
-			string coordinates = userCommand.substr(5, 10);
-			cout << "coordinates: " << coordinates << endl;
+			string coordinates = userCommand.substr(5);
+			//cout << "coordinates: " << coordinates << endl;
+			if (coordinates == "pass") {
+				coordinates = "(-1, -1)";
+			}
 			unique_ptr<OthelloMove> userMove { view.ParseMove(coordinates) };
 			//If the move is valid then apply it
-			cout << "user move: " << *userMove << endl;
+			//cout << "user move: " << *userMove << endl;
 			bool match = false;
 			for (auto iterator = PossibleMoveList.begin(); iterator != PossibleMoveList.end(); iterator++) {
 				if (*userMove == *(*iterator)) {
@@ -136,11 +141,6 @@ int main(int argc, char* argv[]) {
 					break;
 				}
 			}
-			//if (match == true) {
-			//	board->ApplyMove(move(userMove));
-			//	cout << "Applying the move: " << *userMove << endl;
-			//}
-			//cout << "The move is invalid!!!" << endl;
 			if (match == false) {
 				cout << "The move is invalid!!!" << endl;
 			}
@@ -183,8 +183,22 @@ int main(int argc, char* argv[]) {
 		if (board->GetMoveHistory().size() >= 2) {
 			condition = board->IsFinished();
 		}
-	} while ((userCommand != "quit") || condition); // you may want to change the condition
+		cout << "" << endl;
+		cout << "" << endl; 
+	//keep running 
+	} while ((userCommand != "quit") && !condition); // you may want to change the condition
+	testCase.close();
 
+	if (board->GetValue() > 0) {
+		cout << "Black wins" << endl;
+	}
+	else if (board->GetValue() < 0) {
+		cout << "White wins" << endl;
+	}
+	else
+	{
+		cout << "We have a tie" << endl;
+	}
 	cout << "Game finished!!" << endl;
 }
 
