@@ -171,10 +171,10 @@ int main(int argc, char* argv[]) {
 				//alternating
 				tempPlayer = static_cast<OthelloBoard::Player>(static_cast<int>(tempPlayer) * (-1));
 				if (tempPlayer == OthelloBoard::Player::WHITE) {
-					cout << "White's move";
+					cout << "White's move: ";
 				}
 				else {
-					cout << "Black's move";
+					cout << "Black's move: ";
 				}
 				cout << *(*itr) << endl;
 			}

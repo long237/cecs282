@@ -13,7 +13,7 @@ OthelloMove::operator std::string() const {
 	//ostringstream position;
 	//position << "(" << to_string(mPosition.GetRow()) << "," << to_string(mPosition.GetCol()) << ")";
 	//return position.str();
-	if ((mPosition.GetRow() == -1) && (mPosition.GetCol() == -1)) {
+	if (IsPass()) {
 		return "pass";
 	}
 	return mPosition.operator std::string();
