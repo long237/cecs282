@@ -34,7 +34,6 @@ unique_ptr<OthelloMove> OthelloView::ParseMove(const string& strFormat) {
 	int row, col;
 	// order of parsing '(', 'int', ',' , 'int', ')'
 	parser >> dummy1 >> row >> dummy2 >> col >> dummy3;
-	//cout << "row: " << row << " col: " << col << endl;
 	unique_ptr<OthelloMove> PlayerMove = make_unique<OthelloMove>(BoardPosition(row, col));
 
 	return move(PlayerMove);
@@ -44,9 +43,7 @@ ostream& operator<< (ostream& lhs, const OthelloView& rhs) {
 	//print the board to the ostream
 	rhs.PrintBoard(lhs);
 	//Print the current player to the ostream
-	//lhs << "Current Player is: " << static_cast<int> (rhs.mOthelloBoard->GetCurrentPlayer())<< endl;
 	lhs << (rhs.mOthelloBoard->GetCurrentPlayer() == OthelloBoard::Player::WHITE ? "White's move " : "Black's move ");
-	//lhs << "Current Player is: " << (rhs.mOthelloBoard->GetCurrentPlayer()) << endl;
 	return lhs;
 }
 

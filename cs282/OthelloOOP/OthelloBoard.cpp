@@ -15,47 +15,31 @@ vector<unique_ptr<OthelloMove>> OthelloBoard::GetPossibleMoves() const {
 	vector<unique_ptr<OthelloMove>> listOfPossibleMove;
 
 	//Iterate the entire board
-	//for (int row = 0; row < BOARD_SIZE; row++) {
-	//	for (int col = 0; col < BOARD_SIZE; col++) {
-
-			//BoardPosition tempPosition = BoardPosition(row, col);
 	for (BoardPosition tempPosition : BoardPosition::GetRectangularPositions(8,8)){
-			//cout << "Temp position: " << tempPosition << endl;
 			//checking all of the direction in the Cardinal direction list 
 			//only when the current possition is the current player and not empty 
-		//cout << "Temp Position: " << tempPosition << endl;
 			if (mBoard[tempPosition.GetRow()][tempPosition.GetCol()] == Player::EMPTY) {
 
 				//Iterate through the direction lists to check all 8 directions
 				for (int direction = 0; direction < BoardDirection::CARDINAL_DIRECTION.size(); direction++) {
 					//Move to the first position of that direction to check
-					//cout << "rowChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getRowChange()) << " colChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getColChange()) << endl;
 					BoardPosition posInOneDirection = tempPosition + BoardDirection::CARDINAL_DIRECTION[direction];
-					//while (InBounds(posInOneDirection) && (mBoard[posInOneDirection.GetRow][posInOneDirection.GetCol] != Player::EMPTY)) {
 					//Keep moving in that direction as long as it is inbound and it is not our own piece
 					int moveCounter = 0;
 					while (InBounds(posInOneDirection)) {
 						//Move to the next space in that direction if an enemy piece is found
-						//cout << "Step in direction: " << posInOneDirection << endl;
-						//cout << "PosInOneDir inside while: " << posInOneDirection << endl;
 						if (PositionIsEnemy(posInOneDirection, mCurrentPlayer)) {
 							posInOneDirection = posInOneDirection + BoardDirection::CARDINAL_DIRECTION[direction];
 							moveCounter++;
-							//cout << "PosInOneDir inside if: " << posInOneDirection << endl;
 						}
 						//If found an empty space or ourself(currentplayer) then break
-						//cout << "PosInOneDir inside while: " << posInOneDirection << endl;
 						else {
 							break;
 						}
-						//cout << "PosInOneDir inside while: " << posInOneDirection << endl;
 					}
-					//cout << "PosInOneDir inside while: " << posInOneDirection << endl;
-					//cout << "Wannabe possible move: " << tempPosition << endl;
 					//add the possible move of that one direction to the vector
 					if (InBounds(posInOneDirection) && (mBoard[posInOneDirection.GetRow()][posInOneDirection.GetCol()] == mCurrentPlayer) && moveCounter != 0) {
 						//add the temp position in the outer for loop and not the position when stepping in the direction					
-						//cout << "Wannabe possible move: " << tempPosition << endl;
 						listOfPossibleMove.push_back(std::move(make_unique<OthelloMove>(tempPosition)));
 						break;		//The moment you find a direction with a valid pattern(temp - enemy - ourselves), immediately break, otherwise you will add duplicates of the temp position since it can be valid for multiple direction.
 					}
@@ -72,7 +56,6 @@ vector<unique_ptr<OthelloMove>> OthelloBoard::GetPossibleMoves() const {
 void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 	
 	//only execute these if it not a pass
-	//if (InBounds(m->mPosition)) {
 	if (!m->IsPass()) {
 		//Set the chosen position to the player value
 		mBoard[m->mPosition.GetRow()][m->mPosition.GetCol()] = mCurrentPlayer;
@@ -86,14 +69,9 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 			//Counter to flip pieces later on
 			int counterForFlip = 0;
 			//Keep moving in that direction as long as it is inbound and the position is not empty
-			//while (InBounds(OneStepInDirection) && (mBoard[OneStepInDirection.GetRow()][OneStepInDirection.GetCol()] != Player::EMPTY)) {
-			//cout << "rowChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getRowChange()) << " colChange: " << static_cast<int>(BoardDirection::CARDINAL_DIRECTION[direction].getColChange()) << endl;
 			while (InBounds(OneStepInDirection)) {
-				//cout << "Step in direction: " << OneStepInDirection << endl;
 				//Increase the counter if found an enemy piece
-				//cout << "if statement value: " << PositionIsEnemy(OneStepInDirection, mCurrentPlayer) << endl;
 				if (PositionIsEnemy(OneStepInDirection, mCurrentPlayer)) {
-					//cout << "increase the counter" << endl;
 					OneStepInDirection = OneStepInDirection + BoardDirection::CARDINAL_DIRECTION[direction];
 					counterForFlip++;
 				}
@@ -102,15 +80,10 @@ void OthelloBoard::ApplyMove(unique_ptr<OthelloMove> m) {
 					break;
 				}
 			}
-			//cout << "End of while loop" << endl;
-			//cout << "counter for flip: " << counterForFlip << endl;
 			//Only go back and flip if encounter our own piece at the other end
 			//OneStepInDirection variable is now at the end of the direction
 			BoardPosition tempPosition = m->mPosition;
-			//Ask Neal about this argument inside this if statement and why it's only out of bound without InBound()
-			//if (mBoard[OneStepInDirection.GetRow()][OneStepInDirection.GetCol()] == mCurrentPlayer) {
 			if (InBounds(OneStepInDirection) && mBoard[OneStepInDirection.GetRow()][OneStepInDirection.GetCol()] == mCurrentPlayer) {
-				//cout << "inside if loop" << endl;
 				//Add flipset before flipping
 				m->AddFlipSet(OthelloMove::FlipSet(counterForFlip, BoardDirection::CARDINAL_DIRECTION[direction]));
 				//Iterate the same amount of time as the amount of pieces required to flip
@@ -140,7 +113,6 @@ void OthelloBoard::UndoLastMove() {
 		for (int index = 0; index < lastMove->mFlips.size(); index++) {
 			//a temp position starting from the last move position
 			BoardPosition tempPos = lastMove->mPosition;
-			//OthelloMove::FlipSet flipset = lastMove->mFlips[index];
 			//take one step in the Cardinal direction
 			//flip pieces in one direction
 			for (int i = 0; i < lastMove->mFlips[index].mFlipCount; i++) {

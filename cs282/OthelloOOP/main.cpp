@@ -10,17 +10,6 @@
 #include <algorithm>
 using namespace std;
 
-string GetInput() {
-	string userInput = "";
-	while (userInput.length() < 0) {
-		cin >> userInput;
-	}
-	return userInput;
-}
-
-bool IsEqual(const unique_ptr<OthelloMove> &move) {
-	return true;
-}
 
 int main(int argc, char* argv[]) {
 	//// Initialization
@@ -110,28 +99,24 @@ int main(int argc, char* argv[]) {
 		cout << "" << endl;
 	   // Ask to input a command
 		cout << "Enter a command: " << endl;
-		getline(testCase, userCommand);
-		//getline(cin, userCommand);
+		//getline(testCase, userCommand);
+		getline(cin, userCommand);
 		istringstream parser{ userCommand };
 		string firstWord;
 		parser >> firstWord;
-		//cout << "first word: " << firstWord << endl;
 	   // Command loop:
 		  // move (r,c)
 		  // undo n
 		  // showValue
 		  // showHistory
 		  // quit
-		//if (userCommand == "move") {
 		if (firstWord == "move") {
 			string coordinates = userCommand.substr(5);
-			//cout << "coordinates: " << coordinates << endl;
 			if (coordinates == "pass") {
 				coordinates = "(-1, -1)";
 			}
 			unique_ptr<OthelloMove> userMove { view.ParseMove(coordinates) };
 			//If the move is valid then apply it
-			//cout << "user move: " << *userMove << endl;
 			bool match = false;
 			for (auto iterator = PossibleMoveList.begin(); iterator != PossibleMoveList.end(); iterator++) {
 				if (*userMove == *(*iterator)) {

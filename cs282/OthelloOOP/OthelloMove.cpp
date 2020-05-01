@@ -10,12 +10,8 @@ bool OthelloMove::operator==(const OthelloMove& rhs) {
 
 OthelloMove::operator std::string() const {
 	//print the position of the move using the BoardPosition string()
-	//ostringstream position;
-	//position << "(" << to_string(mPosition.GetRow()) << "," << to_string(mPosition.GetCol()) << ")";
-	//return position.str();
 	if (IsPass()) {
 		return "pass";
 	}
 	return mPosition.operator std::string();
-	//return static_cast<string>(mPosition);
 }
